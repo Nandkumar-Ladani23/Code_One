@@ -35,12 +35,12 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     error: null,
     editor: null,
     executionResult: null,
-  // @ts-expect-error
+  // @ts-expect-error: editor may be null if not yet initialized
     getCode: () => get().editor?.getValue() || "",
 
     setEditor: (editor: Monaco) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
-      // @ts-expect-error
+  // @ts-expect-error: setValue expects a string, but may get undefined
       if (savedCode) editor.setValue(savedCode);
 
       set({ editor });
@@ -58,7 +58,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
     setLanguage: (language: string) => {
       // Save current language code before switching
-      // @ts-expect-error
+  // @ts-expect-error: getValue may not exist on editor if not initialized
       const currentCode = get().editor?.getValue();
       if (currentCode) {
         localStorage.setItem(`editor-code-${get().language}`, currentCode);
