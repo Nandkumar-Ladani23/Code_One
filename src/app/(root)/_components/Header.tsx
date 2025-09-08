@@ -2,13 +2,13 @@ import { currentUser } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../convex/_generated/api";
 import Link from "next/link";
-import { Blocks, Code2, Sparkles } from "lucide-react";
+import { Code2, Sparkles } from "lucide-react";
 import { SignedIn } from "@clerk/nextjs";
 import ThemeSelector from "./ThemeSelector";
 import LanguageSelector from "./LanguageSelector";
 import RunButton from "./RunButton";
 import HeaderProfileBtn from "./HeaderProfileBtn";
-
+import Image from "next/image";
 async function Header() {
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
   const user = await currentUser();
@@ -34,7 +34,8 @@ async function Header() {
 
             {/* Logo */}
             <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#0a0a0f] p-0 ring-1 ring-white/10 group-hover:ring-white/20 transition-all">
-                <img src="/logo.png" alt="Code One Logo" className="w-12 h-12 object-contain" />
+                <Image src="/logo.png" alt="Code One Logo" width={48} height={48} className="w-12 h-12 object-contain" />
+
               </div>
 
             <div className="flex flex-col">
@@ -46,7 +47,7 @@ async function Header() {
               </span>
             </div>
           </Link>
-
+                  <Image src="/logo.png" alt="Code One Logo" width={48} height={48} className="w-12 h-12 object-contain" />
           {/* Navigation */}
           <nav className="flex items-center space-x-1">
             <Link
